@@ -53,7 +53,7 @@ int main(){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow *window = glfwCreateWindow(800,600, "Quadrilateral", nullptr,nullptr);
+    GLFWwindow *window = glfwCreateWindow(800,600, "Pyramid", nullptr,nullptr);
 
     if(window == nullptr){
         std::cout << "Failed to create window" << std::endl;

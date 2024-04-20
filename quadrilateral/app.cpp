@@ -15,7 +15,7 @@ void processInputs(GLFWwindow *window);
 std::string readFile(const std::string &filepath);
 
 
-float coordinates [] = {
+GLfloat coordinates [] = {
     //positions                     //color                       // texture
     0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
@@ -23,18 +23,6 @@ float coordinates [] = {
 -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top left
 };
 
-
-// float coordinates [] =
-// {
-//     -0.75f, -1.0f, 0.0f, 0.0f, 0.0f ,1.0f, 0.0f, 0.0f,
-//     0.25f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-//     -0.75f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-
-//     //0.25f, -1.0f, 0.0f, 0.0f, 0.0f, 
-//     //-0.75f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
-//     0.25f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-
-// };
 
 auto readVertexShaderSource = readFile("../vertex.vs");
 const GLchar *vertexShaderSource = readVertexShaderSource.c_str();
@@ -169,20 +157,19 @@ int main(){
         glBindTexture(GL_TEXTURE_2D, texture);
 
        
-        // float curr_angle = glfwGetTime();
-        // float new_angle = curr_angle * 2.0f;
+        float curr_angle = glfwGetTime();
+        float new_angle = curr_angle * 2.0f;
 
         glm::mat4 trans = glm::mat4(1.0f);
-        //trans = glm::rotate(trans, float(glfwGetTime()), glm::vec3(0.0f, 0.0f, 1.0f));
-        // trans = glm::translate(trans, glm::vec3(0.0f, 0.5f, 0.0f));
+        trans = glm::rotate(trans, float(glfwGetTime()), glm::vec3(0.0f, 0.0f, 1.0f));
+        trans = glm::translate(trans, glm::vec3(0.0f, 0.5f, 0.0f));
         trans = glm::scale(trans,glm::vec3(0.5,0.5,0.5));
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
         
         
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        //glDrawElements(GL_TRIANGLES,6, GL_UNSIGNED_INT, 0);
+       
 
         glfwPollEvents();
         glfwSwapBuffers(window);
